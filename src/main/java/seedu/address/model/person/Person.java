@@ -21,17 +21,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Tag tag;
+    private final Allergy allergy;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag) {
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Allergy allergy) {
         requireAllNonNull(name, phone, email, address, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
+        this.allergy = allergy;
     }
 
     public Name getName() {
@@ -58,6 +60,9 @@ public class Person {
         return tag;
     }
 
+    public Allergy getAllergy() {
+        return allergy;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -91,7 +96,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tag.equals(otherPerson.tag);
+                && tag.equals(otherPerson.tag)
+                && allergy.equals(otherPerson.allergy);
     }
 
     @Override

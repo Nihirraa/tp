@@ -44,7 +44,9 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Tag: ")
-                .append(person.getTag());
+                .append(person.getTag())
+                .append("; Allergy: ")
+                .append(person.getAllergy());
         return builder.toString();
     }
 
