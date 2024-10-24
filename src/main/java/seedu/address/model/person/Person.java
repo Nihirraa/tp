@@ -22,11 +22,12 @@ public class Person {
     private final Address address;
     private final Tag tag;
     private final Allergy allergy;
+    private final Date date;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Allergy allergy) {
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Allergy allergy, Date date) {
         requireAllNonNull(name, phone, email, address, tag);
         this.name = name;
         this.phone = phone;
@@ -34,6 +35,7 @@ public class Person {
         this.address = address;
         this.tag = tag;
         this.allergy = allergy;
+        this.date = date;
     }
 
     public Name getName() {
@@ -50,6 +52,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     /**
@@ -115,6 +121,7 @@ public class Person {
                 .add("address", address)
                 .add("tag", tag)
                 .add("allergy", allergy)
+                .add("date", date)
                 .toString();
     }
 

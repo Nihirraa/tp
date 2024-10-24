@@ -14,6 +14,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -48,9 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
         Allergy allergy = ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get());
-
-        Person person = new Person(name, phone, email, address, tag, allergy);
-
+        Date date = new Date(""); // add command does not allow adding an appointment date straight away
+        Person person = new Person(name, phone, email, address, tag, allergy, date);
         return new AddCommand(person);
     }
 

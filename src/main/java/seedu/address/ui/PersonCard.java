@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label allergy;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label date;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,5 +56,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         allergy.setText(person.getAllergy().toString());
         tags.getChildren().add(new Label(person.getTag().tagName));
+        date.setText(person.getDate().value);
     }
 }

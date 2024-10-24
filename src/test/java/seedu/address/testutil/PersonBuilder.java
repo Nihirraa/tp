@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -19,6 +20,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TAG = "Low Risk";
     public static final String DEFAULT_ALLERGY = "Peanuts";
+    public static final String DEFAULT_DATE = "";
 
     private Name name;
     private Phone phone;
@@ -26,6 +28,7 @@ public class PersonBuilder {
     private Address address;
     private Tag tag;
     private Allergy allergy;
+    private Date date;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,6 +40,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tag = new Tag(DEFAULT_TAG);
         allergy = new Allergy(DEFAULT_ALLERGY);
+        date = new Date(DEFAULT_DATE);
     }
 
     /**
@@ -49,6 +53,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tag = personToCopy.getTag();
         allergy = personToCopy.getAllergy();
+        date = personToCopy.getDate();
     }
 
     /**
@@ -98,9 +103,17 @@ public class PersonBuilder {
         this.allergy = new Allergy(allergy);
         return this;
     }
+  
+     /**
+     * Sets the {@code Date} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDate(String date) {
+        this.date = new Date(date);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tag, allergy);
+        return new Person(name, phone, email, address, tag, allergy, date);
     }
 
 }

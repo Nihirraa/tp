@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,6 +26,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final JsonAdaptedTag tag;
     private final JsonAdaptedAllergy allergy;
+    private final String date;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -32,13 +34,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") JsonAdaptedTag tag, @JsonProperty("allergy") JsonAdaptedAllergy allergy) {
+            @JsonProperty("tags") JsonAdaptedTag tag, @JsonProperty("allergy") JsonAdaptedAllergy allergy, @JsonProperty("date") String date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
         this.allergy = allergy;
+        this.date = date;
     }
 
     /**
@@ -51,6 +54,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tag = new JsonAdaptedTag(source.getTag());
         allergy = new JsonAdaptedAllergy(source.getAllergy());
+        date = source.getDate().value;
     }
 
     /**
@@ -96,14 +100,17 @@ class JsonAdaptedPerson {
         }
         personTag = tag.toModelType();
         final Address modelAddress = new Address(address);
-
         final Tag finalPersonTag = personTag;
         if (allergy == null) {
             throw new IllegalValueException(Allergy.MESSAGE_FIELD_MISSING_FORMAT);
         }
         personAllergy = allergy.toModelType();
         final Allergy modelAllergy = personAllergy;
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelAllergy);
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        final Date modelDate = new Date(date);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelAllergy, modelDate);
     }
 
 }
