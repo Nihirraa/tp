@@ -48,6 +48,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tag = personToCopy.getTag();
+        allergy = personToCopy.getAllergy();
     }
 
     /**

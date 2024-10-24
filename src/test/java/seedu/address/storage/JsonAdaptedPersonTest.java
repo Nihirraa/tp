@@ -115,4 +115,19 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidAllergy_throwsIllegalValueException() {
+        JsonAdaptedAllergy invalidAllergy = new JsonAdaptedAllergy(INVALID_ALLERGY);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAG, invalidAllergy);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAllergy_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Allergy");
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
 }

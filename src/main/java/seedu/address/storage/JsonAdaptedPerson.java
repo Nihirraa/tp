@@ -99,7 +99,7 @@ class JsonAdaptedPerson {
 
         final Tag finalPersonTag = personTag;
         if (allergy == null) {
-            throw new IllegalValueException(Tag.MESSAGE_FIELD_MESSAGE_FORMAT);
+            throw new IllegalValueException(Allergy.MESSAGE_FIELD_MISSING_FORMAT);
         }
         personAllergy = allergy.toModelType();
         final Allergy modelAllergy = personAllergy;

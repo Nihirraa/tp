@@ -6,14 +6,14 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tag" : "High Risk",
-    "allergy" : "Wheat"
+    "allergy" : "Penicillin"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tag" : "High Risk",
-    "allergy" : "Gluten, Eggs"
+    "allergy" : "Fish, Soy"
   }, {
     "name" : "Carl Kurz",
     "phone" : "94351253",
@@ -27,27 +27,27 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tag" : "Low Risk",
-    "allergy" : "Fish"
+    "allergy" : "Gluten"
   }, {
     "name" : "Elle Meyer",
     "phone" : "94822242",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tag" : "Low Risk",
-    "allergy" : "Penicillin, Soy"
+    "allergy" : "Lactose"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tag" : "Low Risk",
-    "allergy" : "Nuts"
+    "allergy" : "Soy, Eggs"
   }, {
     "name" : "George Best",
     "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tag" : "Low Risk",
-    "allergy" : "Pollen"
+    "allergy" : "Peanuts"
   } ]
 }
