@@ -71,7 +71,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
         }
         parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPersonDescriptor::setAllergies);
-
+        Set<Allergy> allergyList = editPersonDescriptor.getAllergies().orElse(Set.of());
+        if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                && allergyList.size() > 1) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -16,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -40,6 +43,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -202,6 +206,38 @@ public class EditCommandParserTest {
               .withTags(VALID_TAG_LOW_RISK).build();
         EditCommand expectedCommandLow = new EditCommand(targetIndex, descriptorLow);
         assertParseSuccess(parser, userInputLow, expectedCommandLow);
+    }
+
+    @Test
+    public void parse_allergyNoneWithOtherAllergies_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // Test case where "none" is combined with another allergy
+        String userInput = targetIndex.getOneBased() + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB;
+        assertParseFailure(parser, userInput, Allergy.MESSAGE_CONSTRAINTS);
+
+        // Test case where "none" is the only allergy, which should pass
+        userInput = targetIndex.getOneBased() + ALLERGY_DESC_NONE;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAllergies("None").build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleAllergiesWithoutNone_success() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // Check user input string is correct
+        String userInput = targetIndex.getOneBased() + ALLERGY_DESC1_BOB;
+
+        // Ensure EditPersonDescriptor is built with expected values
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAllergies(VALID_ALLERGY1_BOB).build();
+
+        // Expected command setup
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        // Check if parser processes input as expected
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
 
